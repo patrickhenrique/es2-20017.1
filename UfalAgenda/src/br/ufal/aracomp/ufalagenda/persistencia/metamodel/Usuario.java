@@ -6,6 +6,7 @@ import br.ufal.aracomp.ufalagenda.persistencia.util.SecurityUtil;
 
 public class Usuario {
 	//atributos
+	
 	private int id;
 	private String login;
 	private String hashSenha;
