@@ -5,20 +5,22 @@ import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario;
 public interface IAutenticacao {
 	
 	/*
-	 * Verifica se o usuário é válido e tem como retorno true ou false
-	 * aut_tipo = Campo de autenticação, como email, login, facebook
-	 * aut_valor = Valor do campo de autenticação
-	 * senha = Senha do usuário
+	 * Verifica se as credenciais do usuário são válidas
+	 * usuarios = Objeto do tipo usuário para obter os dados
 	 * */
-	
-	public boolean autenticar(String aut_tipo, String aut_valor, String senha);
+	public void autenticarLogin(Usuario usuario);
 	
 	/*
-	 * Verifica se o usuário é válido e tem como retorno true ou false
-	 * aut_valor = Valor do campo de autenticação
-	 * senha = Senha do usuário
+	 * Verifica se as credenciais do usuário são válidas
+	 * usuarios = Objeto do tipo usuário para obter os dados
 	 * */
-	public boolean autenticar(String aut_valor, String senha);
+	public void autenticarEmail(Usuario usuario);
+	
+	/*
+	 * Verifica se as credenciais do usuário são válidas
+	 * usuarios = Objeto do tipo usuário para obter os dados
+	 * */
+	public void autenticarFacebook(Usuario usuario);
 	
 	/*
 	 * Trata os dados do usuário e verifica se o mesmo está autenticado como retorno true ou false
@@ -26,5 +28,5 @@ public interface IAutenticacao {
 	 * */
 	public boolean logar(Usuario usuario);
 	
-	
 }
+
