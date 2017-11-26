@@ -3,9 +3,13 @@ package br.ufal.aracomp.ufalagenda.persistencia.metamodel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "emaberto")
 public class EmAberto extends Agendamento{
 	//atributos
+	@Column
 	private Date dataLimite;
 	
 	//associacoes

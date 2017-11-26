@@ -1,11 +1,17 @@
 package br.ufal.aracomp.ufalagenda.persistencia.metamodel;
 
 import java.sql.Date;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "horario")
 public class Horario {
 	//atributos
+	@Id
 	private int id;
+	@Column
 	private Date dtHoraInicio;
+	@Column
 	private Date dtHoraFim;
 	
 	//associacoes
