@@ -2,11 +2,17 @@ package br.ufal.aracomp.ufalagenda.persistencia.metamodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "fusohorario")
 public class FusoHorario {
 	//atributos
+	@Id
 	private int id;
+	@Column
 	private String nome;
+	@Column
 	private int horaRelativa;
 	
 	//associacoes

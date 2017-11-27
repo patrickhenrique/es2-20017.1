@@ -2,11 +2,17 @@ package br.ufal.aracomp.ufalagenda.persistencia.metamodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "compromisso")
 public class Compromisso {
 	//atributos
+	@Id
 	private int id;
+	@Column
 	private String descricao;
+	@Column
 	private String local;
 	
 	//associacoes

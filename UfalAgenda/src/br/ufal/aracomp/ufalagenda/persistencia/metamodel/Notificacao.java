@@ -1,9 +1,14 @@
 package br.ufal.aracomp.ufalagenda.persistencia.metamodel;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "notificacao")
 public abstract class Notificacao {
 	//atributos
+	@Id
 	private int id;
+	@Column
 	private String mensagem;
 	
 	//associacoes

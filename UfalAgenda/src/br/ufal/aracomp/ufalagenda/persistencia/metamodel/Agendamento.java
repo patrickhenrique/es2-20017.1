@@ -2,9 +2,13 @@ package br.ufal.aracomp.ufalagenda.persistencia.metamodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "agendamento")
 public class Agendamento {
 	//atributos
+	@Id
 	private int id;
 	
 	//associacoes

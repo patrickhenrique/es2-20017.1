@@ -1,15 +1,23 @@
 package br.ufal.aracomp.ufalagenda.persistencia.metamodel;
 
 import java.util.List;
-
 import br.ufal.aracomp.ufalagenda.persistencia.util.SecurityUtil;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "usuario")
 public class Usuario {
 	//atributos
+	
+	@Id
 	private int id;
+	@Column
 	private String login;
+	@Column
 	private String hashSenha;
+	@Column
 	private String email;
+	@Column
 	private String facebook;
 	
 	//associacoes
