@@ -7,15 +7,20 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "emaberto")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class EmAberto extends Agendamento{
 	//atributos
-	@Column
 	private Date dataLimite;
 	
 	//associacoes
+	@OneToMany(mappedBy="agendamentoEmAberto", fetch=FetchType.LAZY)
 	private List<OpcaoDeHorario> opcoesHorario;
 	
 	//construtores
+	public EmAberto() {
+		super();
+		// Gerado para o Hibernate
+	}
 	public EmAberto(Compromisso compromisso, Date dataLimite) {
 		super(compromisso);
 		this.dataLimite = dataLimite;

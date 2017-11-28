@@ -2,23 +2,23 @@ package br.ufal.aracomp.ufalagenda.persistencia;
 
 import java.util.List;
 
-import br.ufal.aracomp.ufalagenda.persistencia.metamodel.EmAberto;
+import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Definido;
 
-public class IPersistenciaEmAberto extends IBD{
+public class DefinidoDAO extends DAOAcademico{
 	
-	public EmAberto getById(final int id) {
-        return entityManager.find(EmAberto.class, id);
+	public Definido getById(final int id) {
+        return entityManager.find(Definido.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<EmAberto> getAll() {
-	        return entityManager.createQuery("FROM " + EmAberto.class.getName()).getResultList();
+	public List<Definido> getAll() {
+	        return entityManager.createQuery("FROM " + Definido.class.getName()).getResultList();
 	}
 	
-	public void insert(EmAberto emAberto) {
+	public void insert(Definido definido) {
         try{
         	entityManager.getTransaction().begin();
-            entityManager.persist(emAberto);
+            entityManager.persist(definido);
             entityManager.getTransaction().commit();
             
         }catch(Exception ex){
@@ -27,10 +27,10 @@ public class IPersistenciaEmAberto extends IBD{
         }
 	}
 	
-	public void update(EmAberto emAberto){
+	public void update(Definido definido){
         try{
              entityManager.getTransaction().begin();
-             entityManager.merge(emAberto);
+             entityManager.merge(definido);
              entityManager.getTransaction().commit();
              
         }catch(Exception ex){
@@ -39,11 +39,11 @@ public class IPersistenciaEmAberto extends IBD{
         }
 	}
 	
-	public void remove(EmAberto emAberto) {
+	public void remove(Definido definido) {
         try{
              entityManager.getTransaction().begin();
-             cliente = entityManager.find(EmAberto.class, emAberto.getId());
-             entityManager.remove(emAberto);
+             definido = entityManager.find(Definido.class, definido.getId());
+             entityManager.remove(definido);
              entityManager.getTransaction().commit();
              
         }catch(Exception ex){
@@ -54,8 +54,8 @@ public class IPersistenciaEmAberto extends IBD{
 
 	public void removeById(final int id) {
         try{
-        	EmAberto emAberto = getById(id);
-        	remove(emAberto);
+        	Definido definido = getById(id);
+        	remove(definido);
         	
         }catch(Exception ex){
         	ex.printStackTrace();

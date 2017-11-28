@@ -9,16 +9,20 @@ import javax.persistence.*;
 public class FusoHorario {
 	//atributos
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column
 	private String nome;
-	@Column
 	private int horaRelativa;
 	
 	//associacoes
+	@OneToMany(mappedBy="fusoHorario", fetch=FetchType.LAZY)
 	private List<Horario> horarios;
 	
 	//construtores
+	public FusoHorario() {
+		// Criado para o Hibernate
+	}
+	
 	public FusoHorario(String nome, int horaRelativa) {
 		this.nome = nome;
 		this.horaRelativa = horaRelativa;

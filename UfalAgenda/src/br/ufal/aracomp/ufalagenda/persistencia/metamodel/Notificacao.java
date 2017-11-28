@@ -2,19 +2,34 @@ package br.ufal.aracomp.ufalagenda.persistencia.metamodel;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
-@Table(name = "notificacao")
+@Table(name="notificacao")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.CHAR)
 public abstract class Notificacao {
 	//atributos
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column
 	private String mensagem;
 	
 	//associacoes
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_agendamento", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private Agendamento agendamento;
 	
 	//construtores
+	public Notificacao() {
+		// Gerado para o Hibernate
+	}
+	
 	public Notificacao(String mensagem, Agendamento agendamento) {
 		this.mensagem = mensagem;
 		this.agendamento = agendamento;

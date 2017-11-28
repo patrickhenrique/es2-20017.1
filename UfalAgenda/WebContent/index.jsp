@@ -7,10 +7,6 @@
 <title>UFAL Agenda</title>
 </head>
 <body>
-A agenda da Ufal!
-<br>
-Engenharia de Software 2
-<br>
-2017.1
+   Executando a interface grafica...
 </body>
 </html>

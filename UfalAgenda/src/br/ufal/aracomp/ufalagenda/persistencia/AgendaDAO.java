@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Agenda;
 
-public class IPersistenciaAgenda extends IBD{
+public class AgendaDAO extends DAOAcademico{
 	
 	public Agenda getById(final int id) {
         return entityManager.find(Agenda.class, id);
@@ -42,7 +42,7 @@ public class IPersistenciaAgenda extends IBD{
 	public void remove(Agenda agenda) {
         try{
              entityManager.getTransaction().begin();
-             cliente = entityManager.find(Agenda.class, agenda.getId());
+             agenda = entityManager.find(Agenda.class, agenda.getId());
              entityManager.remove(agenda);
              entityManager.getTransaction().commit();
              

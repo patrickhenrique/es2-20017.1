@@ -1,20 +1,33 @@
 package br.ufal.aracomp.ufalagenda.persistencia.metamodel;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name = "definido")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Definido extends Agendamento{
 	//atributos
 	
 	//associacoes
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="agenda_eventos", joinColumns={@JoinColumn(name="id_evento")},
+	inverseJoinColumns={@JoinColumn(name="id_agenda")})
+	@Cascade(CascadeType.ALL)
 	private List<Agenda> agendas;
+	
+	@OneToMany(mappedBy="agendamentoDefinido", fetch=FetchType.LAZY)
 	private List<Horario> horarios;
 	
 	//construtores
+	public Definido() {
+		// Gerado para o Hibernate
+	}
+	
 	public Definido(Compromisso compromisso) {
 		super(compromisso);
 		this.agendas = new ArrayList<>();

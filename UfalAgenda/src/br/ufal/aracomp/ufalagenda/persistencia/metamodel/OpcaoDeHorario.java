@@ -3,19 +3,40 @@ package br.ufal.aracomp.ufalagenda.persistencia.metamodel;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "opcaodehorario")
 public class OpcaoDeHorario{
 	//atributos
-	@Id
+	@Id 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	//associacoes
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_usuario", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private Usuario usuario;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_agendamento", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private EmAberto agendamentoEmAberto;
+	
+	@OneToMany(mappedBy="opcaoDeHorario", fetch=FetchType.LAZY)
 	private List<Horario> horarios;
 	
 	//construtores
+	public OpcaoDeHorario() {
+		// Gerado para o Hibernate
+	}
+	
 	public OpcaoDeHorario(Usuario usuario, EmAberto agendamentoEmAberto, List<Horario> horarios) {
 		this.usuario = usuario;
 		this.agendamentoEmAberto = agendamentoEmAberto;

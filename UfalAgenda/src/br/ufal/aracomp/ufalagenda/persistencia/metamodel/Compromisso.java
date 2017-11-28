@@ -4,23 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "compromisso")
 public class Compromisso {
 	//atributos
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column
 	private String descricao;
-	@Column
 	private String local;
 	
 	//associacoes
+	@OneToOne(mappedBy="compromisso", fetch=FetchType.LAZY)
 	private Agendamento agendamento;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_usuario", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private Usuario autor;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="convidados_compromissos", joinColumns={@JoinColumn(name="id_compromisso")},
+	inverseJoinColumns={@JoinColumn(name="id_usuario")})
+	@Cascade(CascadeType.ALL)
 	private List<Usuario> convidados;
 	
 	//construtores
+	public Compromisso() {
+		// Gerado para o Hibernate
+	}
+	
 	public Compromisso(String descricao, String local, Agendamento agendamento, Usuario autor) {
 		this.descricao = descricao;
 		this.local = local;

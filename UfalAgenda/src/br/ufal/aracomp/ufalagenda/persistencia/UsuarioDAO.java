@@ -2,23 +2,23 @@ package br.ufal.aracomp.ufalagenda.persistencia;
 
 import java.util.List;
 
-import br.ufal.aracomp.ufalagenda.persistencia.metamodel.FusoHorario;
+import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario;
 
-public class IPersistenciaFusoHorario extends IBD{
+public class UsuarioDAO extends DAOAcademico{
 	
-	public FusoHorario getById(final int id) {
-        return entityManager.find(FusoHorario.class, id);
+	public Usuario getById(final int id) {
+        return entityManager.find(Usuario.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<FusoHorario> getAll() {
-	        return entityManager.createQuery("FROM " + FusoHorario.class.getName()).getResultList();
+	public List<Usuario> getAll() {
+	        return entityManager.createQuery("FROM " + Usuario.class.getName()).getResultList();
 	}
 	
-	public void insert(FusoHorario fusoHorario) {
+	public void insert(Usuario usuario) {
         try{
         	entityManager.getTransaction().begin();
-            entityManager.persist(fusoHorario);
+            entityManager.persist(usuario);
             entityManager.getTransaction().commit();
             
         }catch(Exception ex){
@@ -27,10 +27,10 @@ public class IPersistenciaFusoHorario extends IBD{
         }
 	}
 	
-	public void update(FusoHorario fusoHorario){
+	public void update(Usuario usuario){
         try{
              entityManager.getTransaction().begin();
-             entityManager.merge(fusoHorario);
+             entityManager.merge(usuario);
              entityManager.getTransaction().commit();
              
         }catch(Exception ex){
@@ -39,11 +39,11 @@ public class IPersistenciaFusoHorario extends IBD{
         }
 	}
 	
-	public void remove(FusoHorario fusoHorario) {
+	public void remove(Usuario usuario) {
         try{
              entityManager.getTransaction().begin();
-             cliente = entityManager.find(FusoHorario.class, fusoHorario.getId());
-             entityManager.remove(fusoHorario);
+             usuario = entityManager.find(Usuario.class, usuario.getId());
+             entityManager.remove(usuario);
              entityManager.getTransaction().commit();
              
         }catch(Exception ex){
@@ -54,8 +54,8 @@ public class IPersistenciaFusoHorario extends IBD{
 
 	public void removeById(final int id) {
         try{
-        	FusoHorario fusoHorario = getById(id);
-        	remove(fusoHorario);
+        	Usuario usuario = getById(id);
+        	remove(usuario);
         	
         }catch(Exception ex){
         	ex.printStackTrace();
