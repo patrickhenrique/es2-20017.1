@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class EmAberto extends Agendamento{
 	//atributos
 	private Date dataLimite;
+	private Date dataInicio;
 	
 	//associacoes
 	@OneToMany(mappedBy="agendamentoEmAberto", fetch=FetchType.LAZY)
@@ -51,4 +52,8 @@ public class EmAberto extends Agendamento{
 		if(this.opcoesHorario.contains(opcaoHorario))
 			this.opcoesHorario.remove(opcaoHorario);
 	}
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+	
 }
