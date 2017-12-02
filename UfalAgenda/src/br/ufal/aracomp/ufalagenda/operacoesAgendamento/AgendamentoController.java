@@ -112,7 +112,16 @@ public class AgendamentoController implements IAgendamento {
 	@Override
 	public boolean compartilharAgendamento(EmAberto agendamento, List<Usuario> usuarios) {
 		// TODO Auto-generated method stub
-		return false;
+		Compromisso c =  new Compromisso();
+		boolean acao = false;
+		for (int i = 0; i < usuarios.size(); i++) {
+			c.addConvidado(usuarios.get(i));			
+		}
+		if (c.getConvidados() != null) {
+			acao = true;
+		}
+		
+		return acao;
 	}
 
 	@Override
