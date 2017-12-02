@@ -25,7 +25,7 @@ public interface IAgendamento {
 	 * @param compromisso compromisso para o qual deve ser feito um agendamento EmAberto 
 	 * @return O agendamento EmAberto realizado
 	 */
-	public EmAberto criarAgendamento(Compromisso compromisso);
+	public EmAberto criarAgendamento(Compromisso compromisso, Date dataLimite);
 	
 	/**
 	 * Altera os dados do agendamento, preservando apenas a informação do id

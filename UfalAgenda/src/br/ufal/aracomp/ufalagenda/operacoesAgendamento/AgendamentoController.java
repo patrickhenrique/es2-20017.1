@@ -58,14 +58,15 @@ public class AgendamentoController implements IAgendamento {
 	}
 
 	@Override
-	public EmAberto criarAgendamento(Compromisso compromisso) {
+	public EmAberto criarAgendamento(Compromisso compromisso, Date dataLimite) {
 		// TODO Auto-generated method stub
 		Compromisso c = new Compromisso();
 		Agendamento a = new Agendamento(c) {
 		}; 
 		
+		
 		c.setAgendamento(a);
-		Date dataLimite = new Date();
+		
 		EmAberto agendamento = new EmAberto(c, dataLimite);
 		
 		
