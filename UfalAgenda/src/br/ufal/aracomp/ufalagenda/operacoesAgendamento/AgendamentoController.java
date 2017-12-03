@@ -19,7 +19,7 @@ public class AgendamentoController implements IAgendamento {
 	private IPersistencia p;
 	@SuppressWarnings("null")
 	@Override
-	public List<EmAberto> obterAgendamentos(Date inicio, Date fim, Usuario usuario) {		// TODO Auto-generated method stub
+	public List<EmAberto> obterAgendamentos(Date inicio, Date fim, Usuario usuario) {		
 		
 		EmAberto a = null;
 		int i = 0;
@@ -59,15 +59,14 @@ public class AgendamentoController implements IAgendamento {
 
 	@Override
 	public EmAberto criarAgendamento(Compromisso compromisso, Date dataLimite) {
-		// TODO Auto-generated method stub
-		Compromisso c = new Compromisso();
-		Agendamento a = new Agendamento(c) {
+				
+		Agendamento a = new Agendamento(compromisso) {
 		}; 
 		
 		
-		c.setAgendamento(a);
+		compromisso.setAgendamento(a);
 		
-		EmAberto agendamento = new EmAberto(c, dataLimite);
+		EmAberto agendamento = new EmAberto(compromisso, dataLimite);
 		
 		
 		//Grava no banco
@@ -80,14 +79,37 @@ public class AgendamentoController implements IAgendamento {
 
 	@Override
 	public boolean editarAgendamento(EmAberto agendamento) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		boolean acao = false;
+		try {
+			p.update(agendamento);
+			acao = true;
+		}
+		catch(Exception erro) {
+			System.out.println(erro.getMessage());
+		}
+		
+		
+		return acao;
 	}
 
 	@Override
 	public boolean excluirAgendamento(int idAgendamento) {
-		// TODO Auto-generated method stub
+		boolean acao = false;
+		try {
+			p.removeAgendamentoById(idAgendamento);	
+			acao = true;
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
+		return acao;
+		
+		
+		/*/Tentativa anterior
+		 
+		 
 		List<EmAberto> agendamentos = p.getAllAgendamentos();
 		boolean acao = false;
 		for (int i = 0; agendamentos.size() < i; i++) {
@@ -99,8 +121,8 @@ public class AgendamentoController implements IAgendamento {
 			}
 		}
 		
+		/*/
 		
-		return acao;
 	}
 
 	@Override
@@ -111,7 +133,7 @@ public class AgendamentoController implements IAgendamento {
 
 	@Override
 	public boolean compartilharAgendamento(EmAberto agendamento, List<Usuario> usuarios) {
-		// TODO Auto-generated method stub
+		
 		Compromisso c =  new Compromisso();
 		boolean acao = false;
 		for (int i = 0; i < usuarios.size(); i++) {
@@ -133,7 +155,7 @@ public class AgendamentoController implements IAgendamento {
 	@SuppressWarnings("null")
 	@Override
 	public List<EmAberto> verificarEventosParaFechar() {
-		// TODO Auto-generated method stub
+	
 		List<EmAberto> todosEventos = p.getAllAgendamentos();
 		List<EmAberto> eventosFechar = null;
 		Date atual = new Date();		
