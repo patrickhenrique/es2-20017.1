@@ -3,6 +3,7 @@ package br.ufal.aracomp.ufalagenda.operacoesCalendario;
 import java.util.Date;
 import java.util.List;
 
+import br.ufal.aracomp.ufalagenda.persistencia.IPersistencia;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Agenda;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Compromisso;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Definido;
@@ -10,6 +11,12 @@ import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Horario;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario;
 
 public class CalendarioController implements ICalendario {
+	
+	private IPersistencia bd;
+	
+	public CalendarioController(IPersistencia bd) {
+		this.bd=bd;
+	}
 
 	@Override
 	public List<Definido> acessarEventosAgenda(Date inicio, Date fim, Agenda agenda) {
@@ -25,8 +32,12 @@ public class CalendarioController implements ICalendario {
 
 	@Override
 	public boolean editarEvento(Definido evento) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			this.bd.update(evento);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
 	}
 
 	@Override
