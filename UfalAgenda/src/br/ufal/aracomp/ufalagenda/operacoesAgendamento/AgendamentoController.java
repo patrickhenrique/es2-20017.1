@@ -20,6 +20,12 @@ import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario;
 public class AgendamentoController implements IAgendamento {
 
 	private IPersistencia p; //Associação com o IPersistência
+	
+	public AgendamentoController(IPersistencia p) {
+		this.p = p;
+	}
+	
+	
 	@SuppressWarnings("null")
 	@Override
 	public List<EmAberto> obterAgendamentos(Date inicio, Date fim, Usuario usuario) {		
@@ -33,14 +39,14 @@ public class AgendamentoController implements IAgendamento {
 		List<EmAberto> agendamentos = null;	//Inicializa a variável de lista de eventos em aberto
 		
 		c.setTime(inicio); //Seta a data Início no manipulador de datas
-		c.add(Calendar.DATE, -30); 
+		c.add(Calendar.DATE, -30);  //Valor referente a 1 mês
 		Date data = c.getTime(); //Obtém a data adicionada ao manipulador de datas
 		
 		//Se a data início não for informada, a data usada será a data atual -30 dias
 		inicio = inicio == null ? data : inicio; 
 		
 		//Se não for informado o fim, o loop terminará com a data atual do sistema
-		while (a.getDataLimite().before(fim) | a.getDataLimite().before(atual)) { 
+		while (a.getDataLimite().before(fim) || a.getDataLimite().before(atual)) { 
 			a = p.getAgendamentoById(usuario.getId()); //Obtém o agendamento pelo Id do usuário
 			inicio = a.getDataInicio(); 
 			c.setTime(inicio);
@@ -159,8 +165,7 @@ public class AgendamentoController implements IAgendamento {
 
 	@SuppressWarnings("null")
 	@Override
-	public Definido fecharAgendamento(EmAberto agendamento) throws ErroFechamentoException {
-		// TODO Auto-generated method stub
+	public Definido fecharAgendamento(EmAberto agendamento) throws ErroFechamentoException {		
 		
 		//Obtém as opções de Horários
 		List<OpcaoDeHorario> opcoesHorarios = agendamento.getOpcoesHorario(); 
@@ -206,7 +211,9 @@ public class AgendamentoController implements IAgendamento {
 		
 		List<EmAberto> eventosFechar = null; //Inicializa como nula a lista de eventos desejada
 		
-		Date atual = new Date(); //Data attual do sistema		
+		Date atual = new Date(); //Data attual do sistema	
+		
+		//verifica se existe agendamento
 		if (todosEventos.size() != 0) {
 			for (int i = 0; i < todosEventos.size(); i++) {
 				//Se a data limite tiver sido ultrapassada então adicione o evento na lista para fechar
