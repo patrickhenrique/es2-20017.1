@@ -2,9 +2,11 @@ package br.ufal.aracomp.ufalagenda.persistencia;
 
 import java.util.List;
 
+import org.hibernate.Query;
+
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario;
 
-public class UsuarioDAO extends DAOAcademico{
+public class UsuarioDAO  extends DAOAcademico{
 	
 	public Usuario getById(final int id) {
         return entityManager.find(Usuario.class, id);
