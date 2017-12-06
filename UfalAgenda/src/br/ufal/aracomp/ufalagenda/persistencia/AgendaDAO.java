@@ -6,15 +6,28 @@ import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Agenda;
 
 public class AgendaDAO extends DAOAcademico{
 	
+	/**
+	 * Busca uma agenda por ID
+	 * @param id ID da chave primária gerada pelo hibernate
+	 * @return Um objeto do tipo Agenda
+	 */
 	public Agenda getById(final int id) {
         return entityManager.find(Agenda.class, id);
 	}
-
+	
+	/**
+	 * Retorna todas as entidades do tipo agenda
+	 * @return Lista com todos os objetos do tipo Agenda
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Agenda> getAll() {
 	        return entityManager.createQuery("FROM " + Agenda.class.getName()).getResultList();
 	}
 	
+	/**
+	 * Insere uma agenda no BD
+	 * @param agenda Objeto do tipo Agenda
+	 */
 	public void insert(Agenda agenda) {
         try{
         	entityManager.getTransaction().begin();
@@ -27,6 +40,10 @@ public class AgendaDAO extends DAOAcademico{
         }
 	}
 	
+	/**
+	 * Atualiza uma agenda no BD
+	 * @param agenda Objeto do tipo Agenda
+	 */
 	public void update(Agenda agenda){
         try{
              entityManager.getTransaction().begin();
@@ -39,6 +56,10 @@ public class AgendaDAO extends DAOAcademico{
         }
 	}
 	
+	/**
+	 * Remove uma agenda do BD
+	 * @param agenda Objeto do tipo Agenda
+	 */
 	public void remove(Agenda agenda) {
         try{
              entityManager.getTransaction().begin();
@@ -51,7 +72,11 @@ public class AgendaDAO extends DAOAcademico{
              entityManager.getTransaction().rollback();
         }
 	}
-
+	
+	/**
+	 * Remove uma agenda do BD utilizando sua chave primaria
+	 * @param id ID da chave primária associada à Agenda
+	 */
 	public void removeById(final int id) {
         try{
         	Agenda agenda = getById(id);

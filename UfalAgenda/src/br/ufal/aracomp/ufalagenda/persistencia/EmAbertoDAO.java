@@ -6,15 +6,28 @@ import br.ufal.aracomp.ufalagenda.persistencia.metamodel.EmAberto;
 
 public class EmAbertoDAO extends DAOAcademico{
 	
+	/**
+	 * Busca EmAberto por ID
+	 * @param id ID da chave primária gerada pelo hibernate
+	 * @return Um objeto do tipo EmAberto
+	 */
 	public EmAberto getById(final int id) {
         return entityManager.find(EmAberto.class, id);
 	}
-
+	
+	/**
+	 * Retorna todas as entidades do tipo EmAberto 
+	 * @return Lista com todos os objetos do tipo EmAberto
+	 */
 	@SuppressWarnings("unchecked")
 	public List<EmAberto> getAll() {
 	        return entityManager.createQuery("FROM " + EmAberto.class.getName()).getResultList();
 	}
 	
+	/**
+	 * Insere EmAberto no BD
+	 * @param emAberto Objeto do tipo EmAberto
+	 */
 	public void insert(EmAberto emAberto) {
         try{
         	entityManager.getTransaction().begin();
@@ -27,6 +40,10 @@ public class EmAbertoDAO extends DAOAcademico{
         }
 	}
 	
+	/**
+	 * Atualiza EmAberto no BD
+	 * @param emAberto Objeto do tipo EmAberto
+	 */
 	public void update(EmAberto emAberto){
         try{
              entityManager.getTransaction().begin();
@@ -39,6 +56,10 @@ public class EmAbertoDAO extends DAOAcademico{
         }
 	}
 	
+	/**
+	 * Remove EmAberto do BD
+	 * @param emAberto Objeto do tipo EmAberto
+	 */	
 	public void remove(EmAberto emAberto) {
         try{
              entityManager.getTransaction().begin();
@@ -52,6 +73,10 @@ public class EmAbertoDAO extends DAOAcademico{
         }
 	}
 
+	/**
+	 * Remove EmAberto utilizando sua chave primaria
+	 * @param id ID da chave primária associada à EmAberto
+	 */
 	public void removeById(final int id) {
         try{
         	EmAberto emAberto = getById(id);
