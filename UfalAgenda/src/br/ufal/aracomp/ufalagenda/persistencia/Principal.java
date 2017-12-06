@@ -1,6 +1,10 @@
 package br.ufal.aracomp.ufalagenda.persistencia;
 
 import java.util.Date;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.util.ArrayList;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Agenda;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Agendamento;
@@ -11,9 +15,20 @@ import br.ufal.aracomp.ufalagenda.persistencia.metamodel.FusoHorario;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Horario;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.OpcaoDeHorario;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario;
+import br.ufal.aracomp.ufalagenda.persistencia.util.HibernateConfig;
 
 public class Principal {
 	public static void main(String[] args) {
+		Session s = new HibernateConfig().getSession();
+		FusoHorario fusohorario1 = new FusoHorario("Maceio",2);
+		
+		Transaction t = s.beginTransaction();
+		s.saveOrUpdate(fusohorario1);
+		t.commit();
+		s.close();
+	}
+	
+	public static void main2(String[] args) {
 		
 		Date date1 = new Date(01,01,01);
 		Date date2 = new Date(02,02,02);

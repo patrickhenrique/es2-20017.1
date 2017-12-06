@@ -14,6 +14,21 @@ public class UsuarioDAO extends DAOAcademico{
 	public Usuario getById(final int id) {
         return entityManager.find(Usuario.class, id);
 	}
+	
+	//TODO:
+	public Usuario getByLogin(final String login) {
+        return null;
+	}
+	
+	//TODO:
+	public Usuario getByEmail(final String email) {
+        return null;
+	}
+	
+	//TODO:
+	public Usuario getByFacebook(final String facebook) {
+        return null;
+	}
 
 	/**
 	 * Retorna todas as entidades do tipo Usuario 

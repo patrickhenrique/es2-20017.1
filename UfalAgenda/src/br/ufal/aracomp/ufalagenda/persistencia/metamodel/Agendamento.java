@@ -9,6 +9,7 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+
 @MappedSuperclass
 public abstract class Agendamento {
 	//atributos
