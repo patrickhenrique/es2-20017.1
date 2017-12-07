@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Teste</title>
+	<title>Index</title>
 	<!-- Import Google icon font-->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- materialize css-->
@@ -30,12 +31,12 @@
 <body background="images/back02.jpg" style="background-position: center;">
 
 	<div class="navbar-fixed">
-		<nav class="transparent" style="height: 60px">
-			<div class="container">
-				<div class="nav-wrapper">
-					<a href="#" class="brand-logo">PLANNING</a>
+		<nav class="transparent" role="navigation" style="height: 60px">
+			<div class="nav-wrapper container">
+				
+					<a href="#" class="brand-logo" style="font-size: 22px">UFAL Calendar</a>
 					
-					<ul class="right hide-on-med-and-down medium" id="nav-mobile">
+					<ul class="right hide-on-med-and-down medium">
 						<li><a href="#" style="font-size: 12px;" onclick="goToPage(0)">Home</a></li>
 						<li><a href="#" style="font-size: 12px;" onclick="goToPage(1)">Features</a></li>
 						<li><a href="#" style="font-size: 12px;" onclick="goToPage(2)">About</a></li>
@@ -43,8 +44,19 @@
 						<li><a href="#" style="font-size: 12px;" onclick="goToPage(4)">Register</a></li>
 					</ul>
 
+					<!-- barra lateral -->
+					<ul id="nav-mobile" class="side-nav">
+						<li><a href="#" style="font-size: 12px;" onclick="goToPage(0)">Home</a></li>
+						<li><a href="#" style="font-size: 12px;" onclick="goToPage(1)">Features</a></li>
+						<li><a href="#" style="font-size: 12px;" onclick="goToPage(2)">About</a></li>
+						<li><a href="#" style="font-size: 12px;" onclick="goToPage(3)">Login</a></li>
+						<li><a href="#" style="font-size: 12px;" onclick="goToPage(4)">Register</a></li>
+					</ul>
+
+			<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+
 				</div>
-			</div>
+			
 		</nav>
 	</div>
 
@@ -64,10 +76,8 @@
   					<a class="waves-effect waves-light btn-large transparent" onclick="goToPage(4)" style="width: 150px;border: 2px solid #FFFFFF;border-radius: 4px;">REGISTER</a>
 				</div>
 			</div>
-
 		</div>
 		<div class="carousel-item transparent white-text" href="#two!">
-			
 			<div class="item">
 
 				<div style="width: 80%">
@@ -128,6 +138,10 @@
 								<a class="waves-effect waves-light btn-large blue" href="home.html" style="width: 150px;">LOGIN</a>
 	  							<a class="waves-effect waves-light btn-large transparent" onclick="goToPage(4)" style="width: 150px;border: 2px solid #FFFFFF;">REGISTER</a>
 							</div>
+							
+							<div class="row">
+	  							<a class="facebook-login waves-effect waves-light btn-large transparent"style="width: 90%;border: 2px solid #FFFFFF;">ENTRAR COM FACEBOOK</a>
+							</div>
 						
 						</form>
 					</div>
@@ -140,7 +154,7 @@
 			<div class="item">
 				<div>
 					<br>
-					<p class="thin" style="font-size: 28px">REGISTER</p>
+					<p class="thin" style="font-size: 20px">REGISTER</p>
 					<div class="row">
 						<form class="col s12">
 
@@ -175,6 +189,10 @@
 							<div class="row">
 	  							<a class="waves-effect waves-light btn-large transparent modal-trigger" href="#modalAgree" style="width: 90%;border: 2px solid #FFFFFF;">REGISTER</a>
 							</div>
+							
+							<div class="row">
+	  							<a class="facebook-login waves-effect waves-light btn-large transparent"style="width: 90%;border: 2px solid #FFFFFF;">REGISTRAR COM FACEBOOK</a>
+							</div>
 						
 						</form>
 					</div>
@@ -197,15 +215,21 @@
 		</div>
 	</div>
 
+	
+
 
 	<!--Import jQuery before materialize.js-->
+    
+    <script type="text/javascript" src="./js/facebook.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/configs.js"></script>
 
 	<script>
-		function goToPage(index){
-			$('.carousel').carousel('set', index);
-		}
+		//function goToPage(index){
+		//	$('.carousel').carousel('set', index);
+		//}
+		//$(".button-collapse").sideNav();
 
 		$(document).ready(function(){
 			$('.carousel.carousel-slider').carousel({fullWidth: true});
@@ -214,6 +238,8 @@
 			carousel.css('height', winH - 65);
 
 			$('.modal').modal();
+
+			$(".button-collapse").sideNav();
 		});
 	</script>
 
