@@ -5,8 +5,6 @@
 	js.src = "https://connect.facebook.net/en_US/sdk.js";
 	fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-
-
 fbAsyncInit = function() {	
 	FB.init({
 		appId      : '877556605702264',
@@ -14,27 +12,23 @@ fbAsyncInit = function() {
 		xfbml      : true,
 		version    : 'v2.11'
 	});	      
-
-	login=(()=>{
+	loginRegister=((opcao)=>{
 		FB.login(function(response) {
 			if (response.authResponse) {
-				FB.api('/me?fields=id,name,email,picture{url}', function(response) {
-					console.log('Good to see you, ' + response.name + '.');
-
-					document.getElementById("perfil-img").innerHTML="<img src='"+response.picture.data.url+"'/>";
+				FB.getLoginStatus(function(r) {
+					location.href=(opcao=="login") ? "http://localhost:8080/UfalAgenda/Auth?token=":"http://localhost:8080/UfalAgenda/Register?token=" +r.authResponse.accessToken;
+					console.log(r.authResponse.accessToken);
 				});
 			} else {
-				console.log('User cancelled login or did not fully authorize.');
 			}
 		});
 	});
 };
-
-
 onload=(()=>{
-	for(i=0;i<3;i++){
-		document.getElementsByClassName("facebook-login")[i].addEventListener("click",()=>{
-			login();
-		});
-	}
+	document.getElementById("facebook-login").addEventListener("click",()=>{
+		loginRegister("login");
+	});
+	document.getElementById("facebook-register").addEventListener("click",()=>{
+		loginRegister("register");
+	});
 });

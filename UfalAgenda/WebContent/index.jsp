@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,8 +63,29 @@
 
 	<div class="carousel carousel-slider center" data-indicators="true" style="height: 100%">
 
+		
+
 		<div class="carousel-item transparent white-text" href="#one!">
-			
+		
+				<c:if test="${erro!=null}">
+					<div id="card-alert" class="card red lighten-5">
+			            <div class="card-content red-text">
+			              <p>${erro}</p>
+			            </div>
+		            </div>
+	            </c:if>
+	            
+	         
+	         	
+	         
+	            <c:if test="${success!=null}">
+					<div id="card-alert" class="card green lighten-5">
+						<div class="card-content green-text">
+						  <p>${success}</p>
+						</div>
+					</div>
+				</c:if>
+             
 			<div class="item">
 				<div>
 					<!-- <h1 class="bold white-text" style="text-shadow: 2px 2px 18px #3e2723;">PLAN ALL YOUR EVENTS</h1> -->
@@ -108,9 +129,8 @@
 			</div>
 
 		</div>
-
+		
 		<div class="carousel-item transparent white-text" href="#four!">
-			
 			<div class="item">
 
 				<div style="width: 350px">
@@ -118,29 +138,29 @@
 					<p class="thin" style="font-size: 28px">LOGIN</p>
 
 					<div class="row">
-						<form class="col s12">
+						<form class="col s12" method="POST" action="/UfalAgenda/Auth">
 
 							<div class="row">
 								<div class="input-field col s12">
-									<input id="email" type="email" class="validate">
+									<input name="email" id="email" type="email" class="validate">
 									<label for="email">Email</label>
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="input-field col s12">
-									<input id="password" type="password" class="validate">
+									<input name="password" id="password" type="password" class="validate">
 									<label for="password">Password</label>
 								</div>
 							</div>
 
 							<div class="row">
-								<a class="waves-effect waves-light btn-large blue" href="home.html" style="width: 150px;">LOGIN</a>
+								<button type="submit" class="waves-effect waves-light btn-large blue" style="width: 150px;">LOGIN</button>
 	  							<a class="waves-effect waves-light btn-large transparent" onclick="goToPage(4)" style="width: 150px;border: 2px solid #FFFFFF;">REGISTER</a>
 							</div>
 							
 							<div class="row">
-	  							<a class="facebook-login waves-effect waves-light btn-large transparent"style="width: 90%;border: 2px solid #FFFFFF;">ENTRAR COM FACEBOOK</a>
+	  							<a id="facebook-login"  class="waves-effect waves-light btn-large transparent"style="width: 90%;border: 2px solid #FFFFFF;">ENTRAR COM FACEBOOK</a>
 							</div>
 						
 						</form>
@@ -181,7 +201,7 @@
 							
 							<div class="row">
 								<div class="input-field col s12">
-									<input id="password" type="password" class="validate">
+									<input name="password" id="password" type="password" class="validate">
 									<label for="password">Password</label>
 								</div>
 							</div>
@@ -191,7 +211,7 @@
 							</div>
 							
 							<div class="row">
-	  							<a class="facebook-login waves-effect waves-light btn-large transparent"style="width: 90%;border: 2px solid #FFFFFF;">REGISTRAR COM FACEBOOK</a>
+	  							<a id="facebook-register" class="waves-effect waves-light btn-large transparent"style="width: 90%;border: 2px solid #FFFFFF;">REGISTRAR COM FACEBOOK</a>
 							</div>
 						
 						</form>
@@ -236,9 +256,7 @@
 			var winH = $(window).height();
 			var carousel = $(".carousel")
 			carousel.css('height', winH - 65);
-
 			$('.modal').modal();
-
 			$(".button-collapse").sideNav();
 		});
 	</script>
