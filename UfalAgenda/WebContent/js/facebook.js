@@ -16,7 +16,7 @@ fbAsyncInit = function() {
 		FB.login(function(response) {
 			if (response.authResponse) {
 				FB.getLoginStatus(function(r) {
-					location.href=(opcao=="login") ? "http://localhost:8080/UfalAgenda/Auth?token=":"http://localhost:8080/UfalAgenda/Register?token=" +r.authResponse.accessToken;
+					location.href=(opcao=="login") ? "http://localhost:8080/UfalAgenda/Auth?token="+r.authResponse.accessToken:"http://localhost:8080/UfalAgenda/Register?token="+r.authResponse.accessToken;
 					console.log(r.authResponse.accessToken);
 				});
 			} else {

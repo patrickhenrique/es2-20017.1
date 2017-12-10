@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import br.ufal.aracomp.ufalagenda.operacoesAutenticacaoNotificacao.IAutenticacao;
 import br.ufal.aracomp.ufalagenda.operacoesAutenticacaoNotificacao.LoginFacebook;
+import br.ufal.aracomp.ufalagenda.persistencia.UsuarioDAO;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario;
 /**
  * Servlet implementation class Register
@@ -28,7 +29,6 @@ public class Register extends HttpServlet {
     	this.user   = new Usuario();
         // TODO Auto-generated constructor stub
     }
-
     /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -41,20 +41,16 @@ public class Register extends HttpServlet {
 			request.getSession().invalidate();  
 			request.setAttribute("erro","Usuario não Registrado!");  
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
-		}else{		
+		}else{			
 			try{
-				this.user=this.auth.autenticarFacebook(result.getString("email"),result.getString("id"));
+				UsuarioDAO daoUser = new UsuarioDAO();
+				daoUser.insert(new Usuario(null, result.getString("id"), result.getString("email"), null));
+				request.getSession().invalidate();    
+		        request.setAttribute("success","Usuario Cadastrado com Sucesso!");  
+		        request.getRequestDispatcher("/index.jsp").forward(request, response);
 			}catch (Exception e){
-				this.user=null;
+				
 			}
-			if(this.user!=null){
-	        	request.getSession().setAttribute("user", this.user);
-	        	response.sendRedirect("/home.jsp");
-        	}else{
-        		request.getSession().invalidate();    
-		        request.setAttribute("erro","Usuario não Registrado!");  
-		        request.getRequestDispatcher("/index.jsp").forward(request, response);    
-        	}
 		}
 	}
 	/**
@@ -64,24 +60,21 @@ public class Register extends HttpServlet {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
 		String senha = request.getParameter("password");
+		
 		if (email == null || email.isEmpty() || senha == null || senha.isEmpty()) {
 			request.getSession().invalidate();    
 	        request.setAttribute("erro","Email e/ou Senha Inválido!");  
 	        request.getRequestDispatcher("/index.jsp").forward(request, response);
         }else{
         	try{
-        		this.user = this.auth.autenticarEmail(email,senha);
+        		UsuarioDAO daoUser = new UsuarioDAO();
+				daoUser.insert(new Usuario(null, senha, email, null));
+				request.getSession().invalidate();    
+		        request.setAttribute("success","Usuario Cadastrado com Sucesso!");  
+		        request.getRequestDispatcher("/index.jsp").forward(request, response);
         	}catch (Exception e) {
-				this.user=null;
+				
 			}
-        	if(this.user!=null){
-	        	request.getSession().setAttribute("user", this.user);
-	        	response.sendRedirect("/home.jsp");
-        	}else{
-        		request.getSession().invalidate();    
-		        request.setAttribute("erro","Email e/ou Senha Inválido!");  
-		        request.getRequestDispatcher("/index.jsp").forward(request, response);    
-        	}
         }	
 	}
 }

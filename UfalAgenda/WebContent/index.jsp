@@ -176,17 +176,17 @@
 					<br>
 					<p class="thin" style="font-size: 20px">REGISTER</p>
 					<div class="row">
-						<form class="col s12">
+						<form class="col s12" method="POST" action="/UfalAgenda/Register">
 
 							<div class="row">
 
 								<div class="input-field col s6">
-									<input id="first_name" type="text" class="validate">
+									<input name="first_name" id="first_name" type="text" class="validate">
 									<label for="first_name">First Name</label>
 								</div>
 
 								<div class="input-field col s6">
-									<input id="last_name" type="text" class="validate">
+									<input name="last_name" id="last_name" type="text" class="validate">
 									<label for="last_name">Last Name</label>
 								</div>
 							
@@ -194,20 +194,20 @@
 							
 							<div class="row">
 								<div class="input-field col s12">
-									<input id="email" type="email" class="validate">
+									<input name="email" id="email" type="email" class="validate">
 									<label for="email">Email</label>
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="input-field col s12">
-									<input name="password" id="password" type="password" class="validate">
+									<input name="password" name="password" id="password" type="password" class="validate">
 									<label for="password">Password</label>
 								</div>
 							</div>
 
 							<div class="row">
-	  							<a class="waves-effect waves-light btn-large transparent modal-trigger" href="#modalAgree" style="width: 90%;border: 2px solid #FFFFFF;">REGISTER</a>
+	  							<button type="submit" class="waves-effect waves-light btn-large transparent modal-trigger" style="width: 90%;border: 2px solid #FFFFFF;">REGISTER</button>
 							</div>
 							
 							<div class="row">

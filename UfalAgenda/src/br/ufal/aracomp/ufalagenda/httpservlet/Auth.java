@@ -40,7 +40,7 @@ public class Auth extends HttpServlet {
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}else{		
 			try{
-				this.user=this.auth.autenticarFacebook(result.getString("email"),result.getString("id"));
+				this.user=this.auth.autenticarLogin(result.getString("email"),result.getString("id"));
 			}catch (Exception e){
 				this.user=null;
 			}
@@ -67,7 +67,7 @@ public class Auth extends HttpServlet {
 	        request.getRequestDispatcher("/index.jsp").forward(request, response);
         }else{
         	try{
-        		this.user = this.auth.autenticarEmail(email,senha);
+        		this.user = this.auth.autenticarLogin(email,senha);
         	}catch (Exception e) {
 				this.user=null;
 			}
