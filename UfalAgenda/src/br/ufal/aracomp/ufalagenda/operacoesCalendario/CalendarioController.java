@@ -1,10 +1,13 @@
 package br.ufal.aracomp.ufalagenda.operacoesCalendario;
 
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import br.ufal.aracomp.ufalagenda.persistencia.IPersistencia;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Agenda;
+import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Agendamento;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Compromisso;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Definido;
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Horario;
@@ -20,14 +23,50 @@ public class CalendarioController implements ICalendario {
 
 	@Override
 	public List<Definido> acessarEventosAgenda(Date inicio, Date fim, Agenda agenda) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Definido> eventosDefinidos = agenda.getAgendamentosDefinidos();
+		List<Definido> eventosDefinidosFiltrados = new ArrayList<Definido>();
+		List<Horario>horario = null;
+		
+		Date atual = new Date(); 
+		Calendar calendario = Calendar.getInstance();
+
+		if(inicio == null) {
+			calendario.add(Calendar.DATE, 30);
+			inicio = calendario.getTime();
+			
+		}if(fim==null)
+			fim=atual;
+		
+		for(int i=0;i<eventosDefinidos.size();i++) {
+			horario=eventosDefinidos.get(i).getHorarios();
+			for(int j=0;j<horario.size();j++) {
+				if(horario.get(i).getDtHoraInicio().before(inicio)  && horario.get(i).getDtHoraInicio().after(fim)) {
+					eventosDefinidosFiltrados.add(eventosDefinidos.get(i));
+					j=horario.size();
+				}
+			}
+		}
+			
+		if(eventosDefinidosFiltrados.size()==0)
+			eventosDefinidosFiltrados=null;
+ 
+		return eventosDefinidosFiltrados;
 	}
 
 	@Override
 	public Definido criarEvento(Compromisso compromisso, List<Horario> horariosDoCompromisso) {
-		// TODO Auto-generated method stub
-		return null;
+		Agendamento agendamento = new Agendamento(compromisso){};
+		compromisso.setAgendamento(agendamento);
+		Horario hor = null;
+		Definido definido = new Definido(compromisso);
+		
+		for(int i=0;i<horariosDoCompromisso.size();i++){
+			hor = (horariosDoCompromisso).get(i);
+			definido.addHorario(hor);
+		}
+		this.bd.insert(definido);
+		
+		return definido;
 	}
 
 	@Override
@@ -42,20 +81,35 @@ public class CalendarioController implements ICalendario {
 
 	@Override
 	public boolean excluirEvento(int idAgendamento) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			this.bd.removeAgendamentoById(idAgendamento);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean confirmarPresenca(Usuario usuario, Definido definido) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean compartilharEvento(Definido agendamento, List<Usuario> usuarios) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean status = true;
+		Compromisso compromisso = agendamento.getCompromisso();
+		Usuario usu = null;
+		try{
+			for (int i = 0; i < usuarios.size(); i++) {
+				usu = (usuarios).get(i);
+				compromisso.addConvidado(usu);
+			}
+		}catch(Exception e){
+			status = false;
+		}
+		
+		return status;
+	
 	}
-
 }
