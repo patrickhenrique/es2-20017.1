@@ -8,8 +8,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 @Entity
-@Table(name = "definido")
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorValue(value = "D")
 public class Definido extends Agendamento{
 	//atributos
 	

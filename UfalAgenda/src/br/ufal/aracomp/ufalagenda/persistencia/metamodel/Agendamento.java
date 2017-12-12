@@ -10,7 +10,10 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 
-@MappedSuperclass
+@Entity
+@Table(name="agendamento")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="tipo",length=1, discriminatorType=DiscriminatorType.STRING)
 public abstract class Agendamento {
 	//atributos
 	@Id

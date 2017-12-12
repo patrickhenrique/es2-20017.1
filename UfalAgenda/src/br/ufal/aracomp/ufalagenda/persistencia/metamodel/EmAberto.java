@@ -6,8 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "emaberto")
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorValue(value = "A")
 public class EmAberto extends Agendamento{
 	//atributos
 	private Date dataLimite;
