@@ -9,6 +9,11 @@ import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario;
 
 public class NotificacaoController implements INotificacao{
 	
+	/**
+	 * Envia uma notificacao para uma lista de usuarios
+	 * @param notificao Objeto do tipo Notificacao. Notificacao a ser enviada
+	 * @param usuarios Lista de objetos do tipo Usuario. Usuarios a serem notificados
+	 */
 	@Override
 	public void notificar(Notificacao notificacao, ArrayList<Usuario> usuarios) {
 		
@@ -18,7 +23,12 @@ public class NotificacaoController implements INotificacao{
 			enoti.enviar(usuario.getEmail(), "UFAL Agenda", notificacao.getMensagem());
 		}
 	}
-
+	
+	/**
+	 * Envia uma notificacao para a lista de usuarios de um compromisso
+	 * @param notificacao Objeto do tipo Notificacao. Notificacao a ser enviada
+	 * @param compromisso Objeto do tipo Compromisso. O compromisso contem os usuarios a serem notificados
+	 */
 	@Override
 	public void notificarCompromisso(Notificacao notificacao, Compromisso compromisso) {
 		EmailNotificacao enoti = new EmailNotificacao();
