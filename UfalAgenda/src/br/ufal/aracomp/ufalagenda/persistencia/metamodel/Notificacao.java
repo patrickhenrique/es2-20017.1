@@ -8,28 +8,28 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name="notificacao")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.CHAR)
-public abstract class Notificacao {
-	//atributos
+@Table(name = "notificacao")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.CHAR)
+public class Notificacao {
+	// atributos
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String mensagem;
-	
-	//associacoes
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="id_agendamento", insertable=true, updatable=true)
+
+	// associacoes
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_agendamento", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private Agendamento agendamento;
-	
-	//construtores
+
+	// construtores
 	public Notificacao() {
 		// Gerado para o Hibernate
 	}
-	
+
 	public Notificacao(String mensagem, Agendamento agendamento) {
 		this.mensagem = mensagem;
 		this.agendamento = agendamento;
@@ -39,8 +39,8 @@ public abstract class Notificacao {
 		this(mensagem, agendamento);
 		this.id = id;
 	}
-	
-	//metodos
+
+	// metodos
 	public int getId() {
 		return id;
 	}
@@ -52,13 +52,17 @@ public abstract class Notificacao {
 	public Agendamento getAgendamento() {
 		return agendamento;
 	}
-	
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		boolean out = false;
-	
-		if(obj instanceof Notificacao) {
-			if(((Notificacao)obj).getId()==this.id)
+
+		if (obj instanceof Notificacao) {
+			if (((Notificacao) obj).getId() == this.id)
 				obj = true;
 		}
 		return out;
