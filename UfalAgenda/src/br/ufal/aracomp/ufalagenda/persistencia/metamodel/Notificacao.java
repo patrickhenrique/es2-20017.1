@@ -10,7 +10,7 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name="notificacao")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.CHAR)
+@DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.STRING)
 public abstract class Notificacao {
 	//atributos
 	@Id

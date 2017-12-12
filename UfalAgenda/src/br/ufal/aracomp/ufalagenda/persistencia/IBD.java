@@ -3,19 +3,19 @@ package br.ufal.aracomp.ufalagenda.persistencia;
 
 import javax.persistence.*;
 
-public class DAOAcademico {
-	private static DAOAcademico instance;
+public class IBD {
+	private static IBD instance;
     protected EntityManager entityManager;
     
-    public static DAOAcademico getInstance(){
+    public static IBD getInstance(){
               if (instance == null){
-                       instance = new DAOAcademico();
+                       instance = new IBD();
               }
               
               return instance;
     }
 
-    protected DAOAcademico() {
+    protected IBD() {
               entityManager = getEntityManager();
     }
     
