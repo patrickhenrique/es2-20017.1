@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.FusoHorario;
 
-public class FusoHorarioDAO extends DAOAcademico{
+public class FusoHorarioDAO extends IBD{
 	
 	/**
 	 * Busca FusoHorario por ID

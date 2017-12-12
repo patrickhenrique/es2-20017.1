@@ -2,9 +2,11 @@ package br.ufal.aracomp.ufalagenda.persistencia;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario;
 
-public class UsuarioDAO extends DAOAcademico{
+public class UsuarioDAO extends IBD{
 	
 	/**
 	 * Busca Usuario por ID
@@ -17,17 +19,26 @@ public class UsuarioDAO extends DAOAcademico{
 	
 	//TODO:
 	public Usuario getByLogin(final String login) {
-        return null;
+		Query q = entityManager.createQuery("SELECT u FROM Usuario u WHERE login = "+login);
+		List result = q.getResultList();
+		
+		return (Usuario) result.get(0);
 	}
 	
 	//TODO:
 	public Usuario getByEmail(final String email) {
-        return null;
+		Query q = entityManager.createQuery("SELECT u FROM Usuario u WHERE login = "+email);
+		List result = q.getResultList();
+		
+		return (Usuario) result.get(0);
 	}
 	
 	//TODO:
 	public Usuario getByFacebook(final String facebook) {
-        return null;
+		Query q = entityManager.createQuery("SELECT u FROM Usuario u WHERE login = "+facebook);
+		List result = q.getResultList();
+		
+		return (Usuario) result.get(0);
 	}
 
 	/**

@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Definido;
 
-public class DefinidoDAO extends DAOAcademico{
+public class DefinidoDAO extends IBD{
 	
 	/**
 	 * Busca Definido por ID

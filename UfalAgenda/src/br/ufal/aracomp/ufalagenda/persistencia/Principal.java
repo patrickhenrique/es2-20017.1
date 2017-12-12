@@ -19,13 +19,22 @@ import br.ufal.aracomp.ufalagenda.persistencia.util.HibernateConfig;
 
 public class Principal {
 	public static void main(String[] args) {
+		/*
 		Session s = new HibernateConfig().getSession();
 		FusoHorario fusohorario1 = new FusoHorario("Maceio",2);
 		
 		Transaction t = s.beginTransaction();
 		s.saveOrUpdate(fusohorario1);
 		t.commit();
-		s.close();
+		s.close(); */
+		
+		Usuario usuario = new Usuario("usuario1", "1234", "usuario1@gmail.com", "fb.com/usuario1");
+		
+		UsuarioDAO usrbd = new UsuarioDAO();
+		usrbd.insert(usuario);
+		
+		System.out.println(usrbd.getByLogin("usuario1"));
+		
 	}
 	
 	public static void main2(String[] args) {

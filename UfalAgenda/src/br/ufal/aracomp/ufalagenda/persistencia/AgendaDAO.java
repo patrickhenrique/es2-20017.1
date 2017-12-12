@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Agenda;
 
-public class AgendaDAO extends DAOAcademico{
+public class AgendaDAO extends IBD{
 	
 	/**
 	 * Busca uma agenda por ID

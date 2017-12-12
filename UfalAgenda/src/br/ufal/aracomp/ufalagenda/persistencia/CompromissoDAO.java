@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.Compromisso;
 
-public class CompromissoDAO extends DAOAcademico{
+public class CompromissoDAO extends IBD{
 	
 	/**
 	 * Busca Compromisso por ID

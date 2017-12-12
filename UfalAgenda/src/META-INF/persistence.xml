@@ -2,6 +2,18 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="crudHibernate" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.Agenda</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.Agendamento</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.Compromisso</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.Definido</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.EmAberto</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.Email</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.Facebook</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.FusoHorario</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.Horario</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.Notificacao</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.OpcaoDeHorario</class>
+        <class>br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario</class>
         <properties>
             <!-- dados da conexao -->
             <property name="javax.persistence.jdbc.driver_class" value="com.mysql.jdbc.Driver" />
@@ -10,8 +22,8 @@
             <property name="javax.persistence.jdbc.password" value="12345" />
             <!--  propriedades do hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
     </persistence-unit>
 </persistence>

@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.ufal.aracomp.ufalagenda.persistencia.metamodel.EmAberto;
 
-public class EmAbertoDAO extends DAOAcademico{
+public class EmAbertoDAO extends IBD{
 	
 	/**
 	 * Busca EmAberto por ID
