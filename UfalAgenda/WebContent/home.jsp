@@ -1,4 +1,11 @@
+
+
 <!DOCTYPE html>
+<%@page import="java.util.List"%>
+<%@page import="br.ufal.aracomp.ufalagenda.persistencia.metamodel.Definido"%>
+<%@page import="br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario"%>
+<%@page import="br.ufal.aracomp.ufalagenda.controladorDeDialogo.Dialogo"%>
+<%@page import="br.ufal.aracomp.ufalagenda.operacoesAgendamento.IAgendamento"%>
 <html>
 <head>
 	<title>Home</title>
@@ -33,8 +40,16 @@
 	</style>
 
 </head>
-<body background="images/back02.jpg" style="background-position: center;">
 
+
+<%
+	Dialogo dialogo = new Dialogo((Usuario ) session.getAttribute("user"));
+%>
+
+
+
+
+<body background="images/back02.jpg" style="background-position: center;">
     <div class="navbar-fixed">
 		<nav class="transparent" style="height: 60px">
 			<div class="container">
@@ -82,6 +97,7 @@
 					<!-- ====================================================================== -->
 					<!-- ================== CARD DE UM EVENTO ================================== -->
 					<!-- ======================================================================= -->
+					
 					<div style="width: 200px; float: left;margin: 5px;">
 						<div class="card black-text modal-trigger" href="#modal1">
 							<div class="card-content" style="text-align: justify;">
@@ -93,7 +109,34 @@
 							</div>
 							<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">search</i></a>
 						</div>
-					</div>
+					</div>	
+					
+					
+					
+					<% //List <Definido> eventos = dialogo.listaEventos(); %>
+					<!--  
+					<c:forEach items="${eventos}" var="evento">
+					
+						<div style="width: 200px; float: left;margin: 5px;">
+							<div class="card black-text modal-trigger" href="#modal1">
+								<div class="card-content" style="text-align: justify;">
+									
+									<span class="card-title"><b class="blue-grey-text text-darken-2">
+										${ evento.getHorarios().getDtHoraInicio()} - ${ evento.getHorarios().getDtHoraFim()}
+									</span>
+									
+									<p>${ evento.getCompromisso().getDescricao()}</p> <br>
+									<h4>Local:</h4><br>
+									<p>${ evento.getCompromisso().getLocal()}
+								</div>
+								<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">search</i></a>
+							</div>
+						</div>
+						
+					</c:forEach>
+					
+					-->
+					
 					<!-- ==================================================================================== -->
 
 				</div>
@@ -209,12 +252,6 @@
 
 				<div class="row">
 					<form class="col s12">
-						<div class="row">
-							<div class="input-field col s12">
-								<input id="tituloNovoEvento" type="text" class="validate">
-								<label for="tituloNovoEvento">Titulo</label>
-							</div>
-						</div>
 						<div class="row">
 							<div class="input-field col s12">
  								<textarea id="textarea1" class="materialize-textarea"></textarea>
@@ -359,7 +396,6 @@
 				<a class="btn-floating fab waves-effect waves-light red"><i class="material-icons">edit</i></a>
 			</div>
 		</div>
-
 	</div>
 
 	<!--Importar jQuery antes do materialize.js-->
@@ -368,6 +404,7 @@
     <script type="text/javascript" src="js/configs.js"></script>
 
 	<script>
+	
 		$(document).ready(function(){
 			
 			var winH = $(window).height();

@@ -67,6 +67,7 @@
 
 		<div class="carousel-item transparent white-text" href="#one!">
 		
+			<!-- mensagem de erro -->
 				<c:if test="${erro!=null}">
 					<div id="card-alert" class="card red lighten-5">
 			            <div class="card-content red-text">
@@ -77,7 +78,7 @@
 	            
 	         
 	         	
-	         
+	        <!-- mensagem de sucesso --> 
 	            <c:if test="${success!=null}">
 					<div id="card-alert" class="card green lighten-5">
 						<div class="card-content green-text">

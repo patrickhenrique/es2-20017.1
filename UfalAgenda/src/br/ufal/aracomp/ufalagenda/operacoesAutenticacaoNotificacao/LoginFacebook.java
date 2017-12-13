@@ -19,7 +19,7 @@ public class LoginFacebook {
 
 	
 	/**
-	 * Retorna uma estrutura json no em string
+	 * Retorna uma estrutura json em string
 	 * @param url link da api facebook
 	 * @return Objeto json no formato de string
 	 **/
