@@ -21,6 +21,9 @@ public interface IPersistencia {
 
 	//CRUD DE Usuario
 	Usuario getUsuarioById(int id);
+	Usuario getUsuarioByLogin(String login);
+	Usuario getUsuarioByEmail(String email);
+	Usuario getUsuarioByFacebook(String facebook);
 	List<Usuario> getAllUsuarios();
 	void insert(Usuario usuario);
 	void update(Usuario usuario);

@@ -17,13 +17,14 @@
         <properties>
             <!-- dados da conexao -->
             <property name="javax.persistence.jdbc.driver_class" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenda" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agenda?useSSL=false" />
             <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="123456" />
+            <property name="javax.persistence.jdbc.password" value="12345" />
             <!--  propriedades do hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
             <property name="hibernate.format_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.connection.autocommit" value="true" />
         </properties>
     </persistence-unit>
 </persistence>

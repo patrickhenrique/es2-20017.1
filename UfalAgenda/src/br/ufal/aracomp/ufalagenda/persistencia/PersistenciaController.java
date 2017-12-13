@@ -92,6 +92,35 @@ public class PersistenciaController implements IPersistencia {
 	public Usuario getUsuarioById(int id) {
 		return usuarioDAO.getById(id);
 	}
+	
+	@Override
+	/**
+	 * Busca um Usuario pelo Login
+	 * @param Login do usuario
+	 * @return Um objeto do tipo Usuario
+	 */
+	public Usuario getUsuarioByLogin(String login) {
+		return usuarioDAO.getByLogin(login);
+	}
+	@Override
+	/**
+	 * Busca um Usuario pelo E-mail
+	 * @param Email do usuario
+	 * @return Um objeto do tipo Usuario
+	 */
+	public Usuario getUsuarioByEmail(String email) {
+		return usuarioDAO.getByEmail(email);
+	}
+	
+	@Override
+	/**
+	 * Busca um Usuario pelo Facebook
+	 * @param Facebook do usuario
+	 * @return Um objeto do tipo Usuario
+	 */
+	public Usuario getUsuarioByFacebook(String facebook) {
+		return usuarioDAO.getByFacebook(facebook);
+	}
 
 	@Override
 	/**

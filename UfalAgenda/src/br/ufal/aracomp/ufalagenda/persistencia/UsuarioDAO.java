@@ -17,26 +17,41 @@ public class UsuarioDAO extends IBD{
         return entityManager.find(Usuario.class, id);
 	}
 	
-	//TODO:
+	/**
+	 * Busca um Usuario pelo Login
+	 * @param Login do usuario
+	 * @return Um objeto do tipo Usuario
+	 */
 	public Usuario getByLogin(final String login) {
-		Query q = entityManager.createQuery("SELECT u FROM Usuario u WHERE login = "+login);
-		List result = q.getResultList();
+		List result = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.login = :login")
+				.setParameter("login", login)
+				.getResultList();
 		
 		return (Usuario) result.get(0);
 	}
 	
-	//TODO:
+	/**
+	 * Busca um Usuario pelo E-mail
+	 * @param Email do usuario
+	 * @return Um objeto do tipo Usuario
+	 */
 	public Usuario getByEmail(final String email) {
-		Query q = entityManager.createQuery("SELECT u FROM Usuario u WHERE login = "+email);
-		List result = q.getResultList();
+		List result = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.email = :email")
+				.setParameter("email", email)
+				.getResultList();
 		
 		return (Usuario) result.get(0);
 	}
 	
-	//TODO:
+	/**
+	 * Busca um Usuario pelo Facebook
+	 * @param Facebook do usuario
+	 * @return Um objeto do tipo Usuario
+	 */
 	public Usuario getByFacebook(final String facebook) {
-		Query q = entityManager.createQuery("SELECT u FROM Usuario u WHERE login = "+facebook);
-		List result = q.getResultList();
+		List result = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.facebook = :facebook")
+				.setParameter("facebook", facebook)
+				.getResultList();
 		
 		return (Usuario) result.get(0);
 	}
