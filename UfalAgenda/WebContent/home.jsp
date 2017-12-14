@@ -1,6 +1,7 @@
 
 
 <!DOCTYPE html>
+<%@page import="br.ufal.aracomp.ufalagenda.persistencia.UsuarioDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="br.ufal.aracomp.ufalagenda.persistencia.metamodel.Definido"%>
 <%@page import="br.ufal.aracomp.ufalagenda.persistencia.metamodel.Usuario"%>
@@ -43,7 +44,7 @@
 
 
 <%
-	Dialogo dialogo = new Dialogo((Usuario ) session.getAttribute("user"));
+	Dialogo dialogo = new Dialogo();
 %>
 
 
@@ -99,43 +100,53 @@
 					<!-- ======================================================================= -->
 					
 					<div style="width: 200px; float: left;margin: 5px;">
-						<div class="card black-text modal-trigger" href="#modal1">
+						<div class="card black-text modal-trigger" href="#modalCriaEvento">
 							<div class="card-content" style="text-align: justify;">
 								<!-- ===================== TITULO DO CARD (DATA) ========================-->
-								<span class="card-title"><b class="blue-grey-text text-darken-2">May 07</b></span>
+								<span class="card-title"><b class="blue-grey-text text-darken-2">
+									30/12/2017
+								</span>
+								<h6> 10:00h - 12:00h </h6>
+								<br>
 								<!-- ======================== TEXTO DO CARD =============================-->
 								<p>I am a very simple card. I am good at containing small bits of information.
 								I am convenient because I require little markup to use effectively.</p>
 							</div>
-							<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">search</i></a>
+							<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">edit</i></a>
 						</div>
-					</div>	
-					
+					</div>		
+				
 					
 					
 					<% //List <Definido> eventos = dialogo.listaEventos(); %>
-					<!--  
-					<c:forEach items="${eventos}" var="evento">
 					
+					<% //for(Definido evento: eventos){ %>
+						
 						<div style="width: 200px; float: left;margin: 5px;">
-							<div class="card black-text modal-trigger" href="#modal1">
+							<div class="card black-text modal-trigger" href="#modalCriaEvento">
 								<div class="card-content" style="text-align: justify;">
 									
+									
 									<span class="card-title"><b class="blue-grey-text text-darken-2">
-										${ evento.getHorarios().getDtHoraInicio()} - ${ evento.getHorarios().getDtHoraFim()}
+										30/12/2017
 									</span>
 									
-									<p>${ evento.getCompromisso().getDescricao()}</p> <br>
-									<h4>Local:</h4><br>
-									<p>${ evento.getCompromisso().getLocal()}
+									<br>
+									<span class="card-title"><b class="blue-grey-text text-darken-2">
+										<%//= evento.getHorarios().get(0).getDtHoraInicio() %> - <%//= evento.getHorarios().get(0).getDtHoraFim() %>
+									</span>
+									
+									<p><%//= evento.getCompromisso().getDescricao() %></p> <br>
+									<h6>Local:</h6><br>
+									<p><%//= evento.getCompromisso().getLocal() %>
 								</div>
-								<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">search</i></a>
+								<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">edit</i></a>
 							</div>
 						</div>
 						
-					</c:forEach>
+					<% //} %>
 					
-					-->
+					
 					
 					<!-- ==================================================================================== -->
 
@@ -149,10 +160,10 @@
 				<div class="row" style="width: 95%;text-align: left;">
 
 					<ul class="collection">
-						<li><a href="#modalNotificacao" class="collection-item colItem modal-trigger">Aconteceu alguma coisa jaidiajoie eiahdaebc</a></li>
-						<li><a href="#modalNotificacao" class="collection-item colItem modal-trigger">Abc</a></li>
-						<li><a href="#modalNotificacao" class="collection-item colItem modal-trigger">Abc</a></li>
-						<li><a href="#modalNotificacao" class="collection-item colItem modal-trigger">Abc</a></li>
+						<li><a href="#modalNotificacao" class="collection-item colItem modal-trigger">José Aprovou</a></li>
+						<li><a href="#modalNotificacao" class="collection-item colItem modal-trigger">Aliny criou um novo Evento</a></li>
+						<li><a href="#modalNotificacao" class="collection-item colItem modal-trigger">Hoje temos 10 eventos</a></li>
+						<li><a href="#modalNotificacao" class="collection-item colItem modal-trigger">Aceitar Evento</a></li>
 					</ul>
 
 				</div>
@@ -245,16 +256,22 @@
 		</div>
 		<!-- ================ MODAL DE CRIACAO DE EVENTO ==================== -->
 		<div id="modalCriaEvento" class="modal modal-fixed-footer modalCriar" style="max-height: 90%;width: 90%;height: 80%">
+			<form id="form-1" action="./Evento" method="post">
 			<div class="modal-content">
 				
 				<!-- titulo do modal -->
-				<h4>Novo Evento</h4>
+				<h4>Evento</h4>
 
 				<div class="row">
-					<form class="col s12">
+					<div class="col s12">
 						<div class="row">
+							
+							<input type="hidden" name="idEvento" id="idEvento">
+							
+							<input type="hidden" name="convidados" id="convidados">
+							
 							<div class="input-field col s12">
- 								<textarea id="textarea1" class="materialize-textarea"></textarea>
+ 								<textarea id="textarea1" name="descricao" class="materialize-textarea"></textarea>
 								<label for="textarea1">Sobre:</label>
 							</div>
 						</div>
@@ -262,26 +279,30 @@
 							
 							<div class="col">
 								<label for="data">Data</label>
-								<input id="data" type="text" class="datepicker" style="size: 50%" />
+								<input id="data" name="data" type="text" class="datepicker" style="size: 50%" />
 							</div>
 
 							<div class="col">
-								<label for="hora">Horário</label>
-								<input id="hora" type="text" class="timepicker" />
+								<label for="hora">Horário Inicio</label>
+								<input id="hora" name="horaInicio" type="text" class="timepicker" />
+							</div>
+							<div class="col">
+								<label for="hora">Horário Fim</label>
+								<input id="hora" name="horaFim" type="text" class="timepicker" />
 							</div>
 
 							<div class="col">
 								<div class="row">
-									<form action="#">
+									
 										<p>
-											<input name="group1" type="radio" id="selecionado" checked/>
+											<input name="opcao" type="radio" id="selecionado" checked/>
 											<label for="selecionado">Horário Selecionado</label>
 										</p>
 										<p>
-											<input name="group1" type="radio" id="agendado" />
+											<input name="opcao" type="radio" id="agendado" />
 											<label for="agendado">Agendar Horário</label>
 										</p>
-									</form>
+									
 
 								</div>
 							</div>
@@ -298,30 +319,15 @@
 
 								<br>
 
-								<div class="col">
-									<a class="btn-floating waves-effect waves-light teal modal-trigger" href="#modalAdicionaPessoa"><i class="material-icons">add</i></a>
-								</div>
 
 								<div id="participantesNovoEvento" class="col">
-									
-									<!-- ISSO EH UM PARTICIPANTE -->
+									<!-- 
 									<div class="chip">
-										<!-- IMAGEM -->
 										<img src="images/02.jpeg" alt="Contact Person">
-										<!-- nome -->
-										Jane Doe
-										<!-- icone de remover -->
-										<i class="close material-icons">close</i>
-									</div>
-
-									<div class="chip">
-										<!-- IMAGEM -->
-										<img src="images/02.jpeg" alt="Contact Person">
-										<!-- nome -->
 										Joao Doe
-										<!-- icone de remover -->
 										<i class="close material-icons">close</i>
 									</div>
+									-->
 
 								</div>
 
@@ -331,7 +337,7 @@
 							<div id="Adiciona">
 								
 								<br>
-
+								
 								<div style="width: 200px; float: left;margin: 5px;">
 									<div class="card black-text">
 										<div class="card-content" style="text-align: justify;">
@@ -342,13 +348,30 @@
 									</div>
 								</div>
 
+								<% 
+									/*
+									UsuarioDAO p=null;
+									List<Usuario> users = p.getAll();
+									for(Usuario user : users){
+									*/
+								%>
+								<div style="width: 200px; float: left;margin: 5px;" onclick="remove(this);">
+									<div class="card black-text">
+										<div class="card-content" style="text-align: justify;">
+											<img src="images/02.jpeg" style="width: 30px;height: 30px" class="circle">
+											<p><%//= user.getLogin() %></p>
+										</div>
+										<a class="btn-floating halfway-fab waves-effect waves-light teal" onclick="addConvidado(<%//=user.getId() %>'1','Mario'<%//= user.getLogin() %>)"><i class="material-icons">add</i></a>
+									</div>
+								</div>
+								<%//}%>
 
 							</div>
 
 
 						</div>
 
-					</form>
+					</div>
 
 				</div>
 				
@@ -356,9 +379,11 @@
 			</div>
 			<div class="modal-footer">
 				<a class="btn-floating modal-action modal-close waves-effect waves-light red"><i class="material-icons">close</i></a>
+				<a href="./Evento?idEvento=1&opcao=definido" class="btn-floating modal-action modal-close waves-effect waves-light red"><i class="material-icons">remove</i></a>
 				<!-- botao de criar -->
-				<a class="btn-floating waves-effect waves-light teal"><i class="material-icons">check</i></a>
+				<button type="submit" class="btn-floating waves-effect waves-light teal"><i class="material-icons">check</i></button>
 			</div>
+			</form>
 		</div>
 		<!-- ========================================================================= -->
 
@@ -404,6 +429,14 @@
     <script type="text/javascript" src="js/configs.js"></script>
 
 	<script>
+
+		function addConvidado(id,nome){
+			document.getElementById("participantesNovoEvento").innerHTML+='<div class="chip"><img src="images/02.jpeg" alt="Contact Person">'+nome+'<i class="close material-icons">close</i></div>';
+			document.getElementById("convidados").value+=id;
+		}
+		function remove(local){
+			local.innerHTML="";
+		}
 	
 		$(document).ready(function(){
 			

@@ -139,7 +139,7 @@
 					<p class="thin" style="font-size: 28px">LOGIN</p>
 
 					<div class="row">
-						<form class="col s12" method="POST" action="/UfalAgenda/Auth">
+						<form class="col s12" method="POST" action="./Auth">
 
 							<div class="row">
 								<div class="input-field col s12">

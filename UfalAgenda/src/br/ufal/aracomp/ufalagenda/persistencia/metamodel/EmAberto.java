@@ -51,4 +51,6 @@ public class EmAberto extends Agendamento{
 		if(this.opcoesHorario.contains(opcaoHorario))
 			this.opcoesHorario.remove(opcaoHorario);
 	}
+	
+	
 }

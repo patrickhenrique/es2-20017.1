@@ -24,6 +24,7 @@ public class Auth extends HttpServlet {
     	super();
     	this.auth 	= null;
     	this.user   = new Usuario();
+    	
         // TODO Auto-generated constructor stub
     }
 	/**
