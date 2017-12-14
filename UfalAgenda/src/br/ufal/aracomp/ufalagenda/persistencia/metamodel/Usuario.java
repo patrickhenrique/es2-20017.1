@@ -35,8 +35,9 @@ public class Usuario {
 	@JoinTable(name="convidados_compromissos", joinColumns={@JoinColumn(name="id_usuario")},
 	inverseJoinColumns={@JoinColumn(name="id_compromisso")})
 	@Cascade(CascadeType.ALL)
-	private List<Compromisso> compromissosConvidado;
+	//private List<Compromisso> compromissosConvidado;
 	
+	private List<Convite> convidadoConvite;
 	
 	//construtores
 	public Usuario() {
@@ -49,7 +50,7 @@ public class Usuario {
 		this.email = email;
 		this.facebook = facebook;
 		this.compromissosAutor = new ArrayList<>();
-		this.compromissosConvidado = new ArrayList<>();
+		this.convidadoConvite = new ArrayList<>();
 	}
 	
 	public Usuario(int id, String login, String senha, String email, String facebook) {

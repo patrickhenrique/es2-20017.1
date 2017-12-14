@@ -27,31 +27,36 @@ public class CalendarioController implements ICalendario {
 		List<Definido> eventosDefinidosFiltrados = new ArrayList<Definido>();
 		List<Horario>horario = null;
 		
-		Date atual = new Date(); 
-		Calendar calendario = Calendar.getInstance();
-
-		if(inicio == null) {
-			calendario.add(Calendar.DATE, 30);
-			inicio = calendario.getTime();
-			
-		}if(fim==null)
-			fim=atual;
-		
 		for(int i=0;i<eventosDefinidos.size();i++) {
 			horario=eventosDefinidos.get(i).getHorarios();
 			for(int j=0;j<horario.size();j++) {
-				if(horario.get(i).getDtHoraInicio().before(inicio)  && horario.get(i).getDtHoraInicio().after(fim)) {
-					eventosDefinidosFiltrados.add(eventosDefinidos.get(i));
-					j=horario.size();
+				if(fim != null && inicio!= null){
+					if((horario.get(i).getDtHoraInicio().before(inicio) || horario.get(i).getDtHoraInicio().equals(inicio))  && (horario.get(i).getDtHoraFim().equals(fim) || horario.get(i).getDtHoraFim().after(fim))) {
+						eventosDefinidosFiltrados.add(eventosDefinidos.get(i));
+						j=horario.size();
+					}
+				}else if(inicio != null && fim==null ){
+					if((horario.get(i).getDtHoraInicio().before(inicio) || horario.get(i).getDtHoraInicio().equals(inicio))) {
+						eventosDefinidosFiltrados.add(eventosDefinidos.get(i));
+						j=horario.size();
+					}	
+				}else {
+					if(inicio == null && fim !=null){
+						if((horario.get(i).getDtHoraFim().equals(fim) || horario.get(i).getDtHoraFim().after(fim))) {
+							eventosDefinidosFiltrados.add(eventosDefinidos.get(i));
+							j=horario.size();
+						}
+						
+					}
 				}
 			}
 		}
-			
 		if(eventosDefinidosFiltrados.size()==0)
 			eventosDefinidosFiltrados=null;
- 
+		
 		return eventosDefinidosFiltrados;
-	}
+	
+}
 
 	@Override
 	public Definido criarEvento(Compromisso compromisso, List<Horario> horariosDoCompromisso) {
@@ -108,6 +113,8 @@ public class CalendarioController implements ICalendario {
 		}catch(Exception e){
 			status = false;
 		}
+		
+		this.bd.update(agendamento);
 		
 		return status;
 	

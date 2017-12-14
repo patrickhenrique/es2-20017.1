@@ -35,6 +35,8 @@ public class Compromisso {
 	@Cascade(CascadeType.ALL)
 	private List<Usuario> convidados;
 	
+	private List<Convite>convidadoConvites;
+	
 	//construtores
 	public Compromisso() {
 		// Gerado para o Hibernate
@@ -46,6 +48,7 @@ public class Compromisso {
 		this.agendamento = agendamento;
 		this.autor = autor;
 		this.convidados = new ArrayList<>();
+		this.convites = new ArrayList<>();
 	}
 	
 	public Compromisso(int id, String descricao, String local, Agendamento agendamento, Usuario autor) {
