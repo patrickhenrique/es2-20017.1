@@ -31,18 +31,18 @@ public class CalendarioController implements ICalendario {
 			horario=eventosDefinidos.get(i).getHorarios();
 			for(int j=0;j<horario.size();j++) {
 				if(fim != null && inicio!= null){
-					if((horario.get(i).getDtHoraInicio().before(inicio) || horario.get(i).getDtHoraInicio().equals(inicio))  && (horario.get(i).getDtHoraFim().equals(fim) || horario.get(i).getDtHoraFim().after(fim))) {
+					if((horario.get(i).getDtHoraInicio().after(inicio) || horario.get(i).getDtHoraInicio().equals(inicio))  && (horario.get(i).getDtHoraFim().equals(fim) || horario.get(i).getDtHoraFim().before(fim))) {
 						eventosDefinidosFiltrados.add(eventosDefinidos.get(i));
 						j=horario.size();
 					}
 				}else if(inicio != null && fim==null ){
-					if((horario.get(i).getDtHoraInicio().before(inicio) || horario.get(i).getDtHoraInicio().equals(inicio))) {
+					if((horario.get(i).getDtHoraInicio().after(inicio) || horario.get(i).getDtHoraInicio().equals(inicio))) {
 						eventosDefinidosFiltrados.add(eventosDefinidos.get(i)); 
 						j=horario.size(); 
 					}	
 				}else {
 					if(inicio == null && fim !=null){
-						if((horario.get(i).getDtHoraInicio().equals(fim) || horario.get(i).getDtHoraInicio().after(fim))) {
+						if((horario.get(i).getDtHoraInicio().equals(fim) || horario.get(i).getDtHoraInicio().before(fim))) {
 							eventosDefinidosFiltrados.add(eventosDefinidos.get(i)); 
 							j=horario.size();
 						}
