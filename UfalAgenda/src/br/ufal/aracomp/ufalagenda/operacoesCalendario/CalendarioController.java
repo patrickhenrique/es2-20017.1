@@ -37,13 +37,13 @@ public class CalendarioController implements ICalendario {
 					}
 				}else if(inicio != null && fim==null ){
 					if((horario.get(i).getDtHoraInicio().before(inicio) || horario.get(i).getDtHoraInicio().equals(inicio))) {
-						eventosDefinidosFiltrados.add(eventosDefinidos.get(i));
-						j=horario.size();
+						eventosDefinidosFiltrados.add(eventosDefinidos.get(i)); 
+						j=horario.size(); 
 					}	
 				}else {
 					if(inicio == null && fim !=null){
-						if((horario.get(i).getDtHoraFim().equals(fim) || horario.get(i).getDtHoraFim().after(fim))) {
-							eventosDefinidosFiltrados.add(eventosDefinidos.get(i));
+						if((horario.get(i).getDtHoraInicio().equals(fim) || horario.get(i).getDtHoraInicio().after(fim))) {
+							eventosDefinidosFiltrados.add(eventosDefinidos.get(i)); 
 							j=horario.size();
 						}
 						
